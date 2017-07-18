@@ -1,0 +1,21 @@
+{
+  "consul": "consul:8500",
+  "logging": {
+    "level": "INFO",
+    "format": "default",
+    "output": "stdout"
+  },
+  "jobs": [
+    {
+      "name": "arangodb",
+      "exec": "arangod",
+      "restarts": "unlimited",
+      "port": 5984,
+      "health": {
+        "exec": "/usr/bin/curl --fail -s -o /dev/null http://localhost:8529",
+        "interval": 3,
+        "ttl": 10
+      }
+    }
+  ]
+}
