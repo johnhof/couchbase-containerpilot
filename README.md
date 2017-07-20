@@ -1,14 +1,14 @@
-# arangodb-containerpilot
+# couchbase-containerpilot
 
-arangodb + [containerpilot](https://www.joyent.com/containerpilot) docker images for bootstrapping your [autopiloted](https://www.joyent.com/blog/applications-on-autopilot) infractructure
+couchbase + [containerpilot](https://www.joyent.com/containerpilot) docker images for bootstrapping your [autopiloted](https://www.joyent.com/blog/applications-on-autopilot) infractructure
 
-[**Dockerhub Link**](https://hub.docker.com/r/johnhof/arangodb-containerpilot/)
+[**Dockerhub Link**](https://hub.docker.com/r/johnhof/couchbase-containerpilot/)
 
 ## Configuration
 
-### Arangodb
+### Couchbase
 
-See the [arangodb image](https://hub.docker.com/_/arangodb/) documentation
+See the [couchbase image](https://hub.docker.com/_/couchbase/) documentation
 
 ### Containerpilot
 
@@ -24,18 +24,21 @@ Uses default containerpilot.json file:
   },
   "jobs": [
     {
-      "name": "arangodb",
-      "exec": "arangod",
-      "restarts": "unlimited",
-      "port": 5984,
+      "name": "couchbase",
+      "exec": [
+        "/entrypoint.sh",
+        "couchbase-server"
+      ],
+      "port": 8091,
       "health": {
-        "exec": "/usr/bin/curl --fail -s -o /dev/null http://localhost:8529",
+        "exec": "curl --fail -s -o /dev/null http://localhost:8091",
         "interval": 3,
         "ttl": 10
       }
     }
   ]
 }
+
 ```
 
 Can be overwritten by either:

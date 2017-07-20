@@ -7,12 +7,14 @@
   },
   "jobs": [
     {
-      "name": "arangodb",
-      "exec": "arangod",
-      "restarts": "unlimited",
-      "port": 5984,
+      "name": "couchbase",
+      "exec": [
+        "/entrypoint.sh",
+        "couchbase-server"
+      ],
+      "port": 8091,
       "health": {
-        "exec": "/usr/bin/curl --fail -s -o /dev/null http://localhost:8529",
+        "exec": "curl --fail -s -o /dev/null http://localhost:8091",
         "interval": 3,
         "ttl": 10
       }
